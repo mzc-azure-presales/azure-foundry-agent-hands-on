@@ -106,9 +106,46 @@ uv --version
 
 VS Code Python 확장은 다음 [실습 환경 처음 잡기](#실습-환경-처음-잡기) 단계에서 만들 `.venv`를 자동으로 인식해 코드 자동완성(IntelliSense), ▶ 실행 버튼, F5 디버깅을 지원합니다.
 
+### 4. (선택) Git 설치
+
+[저장소 가져오기](#1-저장소-가져오기)에서 `git clone`으로 저장소를 받을 때 필요합니다. ZIP 다운로드만 사용할 계획이면 건너뛰어도 됩니다. 이미 설치되어 있는지는 `git --version`으로 먼저 확인하세요.
+
+Windows:
+
+```powershell
+winget install --id Git.Git -e   # WinGet
+scoop install git                # Scoop (커뮤니티 패키지)
+choco install git                # Chocolatey (커뮤니티 패키지)
+```
+
+> 또는 [git-scm.com/download/win](https://git-scm.com/download/win)에서 Git for Windows 설치 프로그램을 받아 설치합니다(설치 옵션은 기본값을 그대로 사용해도 됩니다).
+
+macOS:
+
+```bash
+xcode-select --install   # Xcode Command Line Tools (git 포함, 가장 간단)
+brew install git         # 또는 Homebrew
+```
+
+> 또는 [git-scm.com/download/mac](https://git-scm.com/download/mac)의 설치 안내를 따릅니다.
+
+Linux:
+
+```bash
+sudo apt install git      # Debian/Ubuntu
+sudo dnf install git      # Fedora/RHEL/CentOS
+sudo pacman -S git        # Arch
+```
+
+설치 후 새 터미널에서 버전을 확인합니다.
+
+```bash
+git --version
+```
+
 ## 실습 환경 처음 잡기
 
-준비물(서비스/구독, uv, VS Code)이 갖춰졌으면 이제 실제 실습 환경을 잡습니다. 아래 순서대로 진행하면 저장소 복제 → 의존성 설치 → Foundry 리소스 연결 → 기본 설정 확인까지 한 번에 끝납니다.
+준비물(서비스/구독, uv, VS Code, 필요 시 Git)이 갖춰졌으면 이제 실제 실습 환경을 잡습니다. 아래 순서대로 진행하면 저장소 복제 → 의존성 설치 → Foundry 리소스 연결 → 기본 설정 확인까지 한 번에 끝납니다.
 
 ### 1. 저장소 가져오기
 
@@ -121,7 +158,7 @@ git clone https://github.com/mzc-azure-presales/azure-foundry-agent-hands-on.git
 cd azure-foundry-agent-hands-on
 ```
 
-`git clone` 명령은 Windows/macOS/Linux에서 동일합니다. git이 없으면 [git-scm.com](https://git-scm.com/downloads)에서 설치하거나 아래 ZIP 방식을 사용하세요. 실습 중 코드를 직접 수정하거나 이후 업데이트(`git pull`)를 받고 싶다면 이 방식을 권장합니다.
+`git clone` 명령은 Windows/macOS/Linux에서 동일합니다. git이 없으면 위 [(선택) Git 설치](#4-선택-git-설치)를 참고해 먼저 설치하거나, 아래 ZIP 방식을 사용하세요. 실습 중 코드를 직접 수정하거나 이후 업데이트(`git pull`)를 받고 싶다면 이 방식을 권장합니다.
 
 #### 방법 B. ZIP 다운로드 (git 없이)
 
