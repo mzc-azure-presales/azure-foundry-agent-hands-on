@@ -106,43 +106,6 @@ uv --version
 
 VS Code Python 확장은 다음 [실습 환경 처음 잡기](#실습-환경-처음-잡기) 단계에서 만들 `.venv`를 자동으로 인식해 코드 자동완성(IntelliSense), ▶ 실행 버튼, F5 디버깅을 지원합니다.
 
-### 4. (선택) Git 설치
-
-git은 이 실습의 필수 도구가 아닙니다. 저장소는 아래 [저장소 가져오기](#1-저장소-가져오기)처럼 ZIP으로 받으므로 git 없이도 모든 실습을 진행할 수 있습니다. 다만 받은 코드를 본인이 직접 버전 관리하거나 평소 git 워크플로를 쓰고 싶다면 아래를 참고해 설치하세요. 이미 설치되어 있는지는 `git --version`으로 확인합니다.
-
-Windows:
-
-```powershell
-winget install --id Git.Git -e   # WinGet
-scoop install git                # Scoop (커뮤니티 패키지)
-choco install git                # Chocolatey (커뮤니티 패키지)
-```
-
-> 또는 [git-scm.com/download/win](https://git-scm.com/download/win)에서 Git for Windows 설치 프로그램을 받아 설치합니다(설치 옵션은 기본값을 그대로 사용해도 됩니다).
-
-macOS:
-
-```bash
-xcode-select --install   # Xcode Command Line Tools (git 포함, 가장 간단)
-brew install git         # 또는 Homebrew
-```
-
-> 또는 [git-scm.com/download/mac](https://git-scm.com/download/mac)의 설치 안내를 따릅니다.
-
-Linux:
-
-```bash
-sudo apt install git      # Debian/Ubuntu
-sudo dnf install git      # Fedora/RHEL/CentOS
-sudo pacman -S git        # Arch
-```
-
-설치 후 새 터미널에서 버전을 확인합니다.
-
-```bash
-git --version
-```
-
 ## 실습 환경 처음 잡기
 
 준비물(서비스/구독, uv, VS Code)이 갖춰졌으면 이제 실제 실습 환경을 잡습니다. 아래 순서대로 진행하면 저장소 내려받기 → 의존성 설치 → Foundry 리소스 연결 → 기본 설정 확인까지 한 번에 끝납니다.
