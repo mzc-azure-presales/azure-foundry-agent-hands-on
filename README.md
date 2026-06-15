@@ -227,6 +227,14 @@ Application Insights를 만들지 않아도 실습 코드는 콘솔 trace로 계
 
 이 리포지토리의 공통 실행 코드는 Azure CLI 로그인을 사용하지 않습니다. `.env`에 endpoint와 API key를 넣은 뒤 아래 명령으로 기본 환경을 먼저 확인하세요.
 
+먼저 도우미 스크립트로 `.env` 항목이 제대로 채워졌는지 한 번에 점검할 수 있습니다. MS Foundry 핵심 설정은 필수(없으면 실패), 8장 확장용 설정은 선택(없으면 경고)으로 구분해 보고하고, `.env.example`의 자리표시자(`<...>`)를 안 채운 경우도 잡아 줍니다.
+
+```bash
+uv run python check_env.py
+```
+
+이어서 Foundry 연결 정보까지 포함해 확인합니다.
+
 ```bash
 uv run Chapter2_Foundry_Fundamentals/2.1_check_foundry_settings.py
 ```
