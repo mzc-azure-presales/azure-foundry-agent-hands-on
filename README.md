@@ -34,10 +34,17 @@
 - Microsoft Foundry 프로젝트 또는 Azure OpenAI 리소스를 만들 수 있는 권한
 - (8장에서만 필요) Azure AI Search, Knowledge Base, Application Insights, Log Analytics 사용 권한
 
-이 단계에서는 "이런 서비스를 쓸 수 있는 계정과 권한이 있는지"만 확인합니다. 실제 endpoint/API key 확보, 모델 배포, tracing, Application Insights 생성 같은 리소스 준비는 아래 소프트웨어 설치를 마친 뒤 [실습 환경 처음 잡기](#실습-환경-처음-잡기)에서 단계별로 진행합니다.
-
 > [!NOTE]
 > **1장부터 7장까지는 미리 만들어진 Foundry 프로젝트(모델 배포 포함)만으로 따라갈 수 있습니다.** 별도의 Azure 리소스 배포는 **8장에서만** 필요합니다 — Azure AI Search, Knowledge Base, Application Insights, Log Analytics.
+
+이 단계에서는 "이런 서비스를 쓸 수 있는 계정과 권한이 있는지"만 확인합니다. 실제 endpoint/API key 확보, 모델 배포, tracing, Application Insights 생성 같은 리소스 준비는 아래 소프트웨어 설치를 마친 뒤 [실습 환경 처음 잡기](#실습-환경-처음-잡기)에서 단계별로 진행합니다.
+
+> [!IMPORTANT]
+> **개인 신용카드로 트라이얼/구독을 만들어 참여하는 경우, 비용 관리에 주의하세요.**
+>
+> - **DCC(원화 결제) 차단:** 카드 등록·결제 시 해외 통화(예: USD)로 청구될 때 카드사나 결제 화면이 "원화로 결제(DCC)"를 제안하면 **거절하고 청구 통화 그대로 결제**합니다. DCC는 환율에 수수료가 얹혀 더 비쌉니다.
+> - **단일 리소스 그룹:** 8장에서 직접 만드는 리소스(Azure AI Search, Knowledge Base, Application Insights, Log Analytics)는 모두 **하나의 전용 리소스 그룹**에 만드세요.
+> - **실습 종료 후 삭제:** 실습이 끝나면 그 리소스 그룹을 통째로 삭제하면 과금이 한 번에 정리됩니다. (포털에서 리소스 그룹 삭제, 또는 `az group delete --name <resource-group> --yes`)
 
 ### 2. uv 설치와 Python 3.11.9 (Python은 uv가 자동 관리)
 

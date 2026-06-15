@@ -350,6 +350,8 @@ App Insights가 삭제된 workspace를 바라보면 Foundry monitoring 데이터
 
 > [!TIP]
 > 아래 `az` 명령은 **로컬에 Azure CLI를 설치하지 않아도** 됩니다. [shell.azure.com](https://shell.azure.com)(Azure Cloud Shell)을 열면 `az`가 이미 설치돼 있고 현재 로그인한 계정으로 인증된 상태라 바로 실행할 수 있습니다. Cloud Shell 상단에서 **Bash** 또는 **PowerShell**을 고를 수 있으니 아래 두 블록 중 맞는 쪽을 그대로 붙여 넣으세요. 여러 구독을 쓰는 경우 `az account set --subscription <subscription-id>`로 대상 구독을 먼저 지정합니다. (로컬에 `az`가 이미 설치돼 있다면 로컬 터미널에서 실행해도 됩니다.)
+>
+> Cloud Shell을 처음 열면 스토리지 계정 연결을 묻는데, **스토리지 없는 임시(ephemeral) 세션**을 선택하세요. 영구(스토리지 마운트) 세션은 별도 리소스 그룹에 storage account를 만들어 실습 후에도 소액 과금이 남을 수 있습니다.
 
 Windows (PowerShell):
 
