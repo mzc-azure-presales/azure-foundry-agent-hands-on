@@ -32,9 +32,12 @@
 
 - Microsoft Azure 구독(계정)
 - Microsoft Foundry 프로젝트 또는 Azure OpenAI 리소스를 만들 수 있는 권한
-- (선택) 8장 확장 실습을 위한 Azure AI Search, Application Insights 사용 권한
+- (8장에서만 필요) Azure AI Search, Knowledge Base, Application Insights, Log Analytics 사용 권한
 
 이 단계에서는 "이런 서비스를 쓸 수 있는 계정과 권한이 있는지"만 확인합니다. 실제 endpoint/API key 확보, 모델 배포, tracing, Application Insights 생성 같은 리소스 준비는 아래 소프트웨어 설치를 마친 뒤 [실습 환경 처음 잡기](#실습-환경-처음-잡기)에서 단계별로 진행합니다.
+
+> [!NOTE]
+> **1장부터 7장까지는 미리 만들어진 Foundry 프로젝트(모델 배포 포함)만으로 따라갈 수 있습니다.** 별도의 Azure 리소스 배포는 **8장에서만** 필요합니다 — Azure AI Search, Knowledge Base, Application Insights, Log Analytics.
 
 ### 2. uv 설치와 Python 3.11.9 (Python은 uv가 자동 관리)
 
