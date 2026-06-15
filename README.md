@@ -178,13 +178,13 @@ Foundry inference endpoint를 직접 쓰는 경우에는 `FOUNDRY_OPENAI_ENDPOIN
 
 이 실습의 기본 예제는 다음 모델 배포 이름을 사용합니다.
 
-- Chat/Responses 모델 배포: `gpt-5.4`
+- Chat/Responses 모델 배포: `gpt-5.2`
 - Embeddings 모델 배포: `text-embedding-3-small`
 
 모델 배포 이름은 Azure 모델 이름이 아니라 Foundry 프로젝트 안에서 만든 배포 이름입니다. 다른 이름으로 배포했다면 `.env`에서 아래 값을 실제 배포 이름에 맞게 변경하세요.
 
 ```bash
-FOUNDRY_MODEL_DEPLOYMENT_NAME=gpt-5.4
+FOUNDRY_MODEL_DEPLOYMENT_NAME=gpt-5.2
 FOUNDRY_EMBEDDING_DEPLOYMENT_NAME=text-embedding-3-small
 ```
 
@@ -293,7 +293,7 @@ FOUNDRY_OPENAI_ENDPOINT=https://<resource>.openai.azure.com/
 FOUNDRY_API_KEY=<your-api-key>
 FOUNDRY_OPENAI_API_VERSION=2025-04-01-preview
 FOUNDRY_OPENAI_ENDPOINT_TYPE=azure_openai
-FOUNDRY_MODEL_DEPLOYMENT_NAME=gpt-5.4
+FOUNDRY_MODEL_DEPLOYMENT_NAME=gpt-5.2
 FOUNDRY_EMBEDDING_DEPLOYMENT_NAME=text-embedding-3-small
 FOUNDRY_REASONING_EFFORT=low
 
