@@ -327,7 +327,7 @@ FOUNDRY_APPLICATIONINSIGHTS_CONNECTION_STRING=<application-insights-connection-s
 FOUNDRY_APPLICATIONINSIGHTS_AUTO_CREATE=false
 ```
 
-교육 실습에서는 자동 생성 대신 포털에서 수동 생성한 뒤 connection string을 붙여 넣는 흐름을 사용합니다. `FOUNDRY_APPLICATIONINSIGHTS_AUTO_CREATE`는 기본값 `false`로 유지합니다.
+교육 실습에서는 자동 생성 대신 포털에서 수동 생성한 뒤 connection string을 붙여 넣는 흐름을 사용합니다. `FOUNDRY_APPLICATIONINSIGHTS_AUTO_CREATE`는 기본값 `false`로 유지합니다. 참고로 `AUTO_CREATE=true` 자동 생성 경로는 **로컬에 설치된 `az`**를 호출하므로, 로컬 `az`가 없으면 포털이나 [Cloud Shell](https://shell.azure.com)에서 만든 connection string을 붙여 넣는 이 기본 흐름을 사용하면 됩니다. (`az`가 없을 때 8.1은 자동 생성을 건너뛰고 콘솔 trace로 계속 진행합니다.)
 
 ### 8.6.1 Monitoring 데이터가 0으로 보일 때
 
@@ -347,6 +347,9 @@ App Insights가 삭제된 workspace를 바라보면 Foundry monitoring 데이터
 ```
 
 이 경우 새 workspace를 만들고 Application Insights의 `WorkspaceResourceId`를 갱신합니다. 예시는 `ystest8` Application Insights와 `ys-kim-sg` 리소스 그룹 기준입니다.
+
+> [!TIP]
+> 아래 `az` 명령은 **로컬에 Azure CLI를 설치하지 않아도** 됩니다. [shell.azure.com](https://shell.azure.com)(Azure Cloud Shell)을 열면 `az`가 이미 설치돼 있고 현재 로그인한 계정으로 인증된 상태라 바로 실행할 수 있습니다. Cloud Shell 상단에서 **Bash** 또는 **PowerShell**을 고를 수 있으니 아래 두 블록 중 맞는 쪽을 그대로 붙여 넣으세요. 여러 구독을 쓰는 경우 `az account set --subscription <subscription-id>`로 대상 구독을 먼저 지정합니다. (로컬에 `az`가 이미 설치돼 있다면 로컬 터미널에서 실행해도 됩니다.)
 
 Windows (PowerShell):
 
