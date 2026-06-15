@@ -31,7 +31,7 @@ $exampleKeys = Get-Content .env.example | ForEach-Object { if ($_ -match '^\s*([
 Compare-Object $envKeys $exampleKeys
 ```
 
-macOS / Linux (bash·zsh):
+macOS / Linux (bash, zsh):
 
 ```bash
 diff <(grep -oE '^[A-Za-z_][A-Za-z0-9_]*' .env | sort) \

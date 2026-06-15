@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     print("1. 먼저 8.1, 8.2 또는 8.3 실습에서 agent version을 남겨 둡니다.")
     print('   환경 변수 설정 (Windows PowerShell): $env:FOUNDRY_KEEP_AGENT="true"')
-    print("   환경 변수 설정 (macOS/Linux bash·zsh): export FOUNDRY_KEEP_AGENT=true")
+    print("   환경 변수 설정 (macOS/Linux bash, zsh): export FOUNDRY_KEEP_AGENT=true")
     print("   실행 예: python ./Chapter8_Foundry_Agents/8.1_create_and_run_foundry_agent.py")
     print("   실행 예: python ./Chapter8_Foundry_Agents/8.2_create_foundry_agent_with_knowledge_base.py")
     print("   실행 예: python ./Chapter8_Foundry_Agents/8.3_create_foundry_agent_with_mcp.py")

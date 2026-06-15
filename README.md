@@ -2,12 +2,12 @@
 
 이 리포지토리는 기존 Azure OpenAI 중심 예제를 Microsoft Foundry 기반 에이전트 실습으로 재구성한 6시간 Hands-on 강의 자료입니다. 모든 신규 공통 실행 경로는 OpenAI-compatible endpoint, API key, 모델 배포명, OpenTelemetry tracing을 기준으로 동작합니다.
 
-교육 목표는 생성 AI 호출에서 출발해 prompt-style agent, RAG, MCP 도구 서버, trace와 guardrails, 실제 Foundry Agent Service agent 생성까지 이어지는 운영형 에이전트 개발 흐름을 경험하는 것입니다.
+교육 목표는 생성형 AI 호출에서 출발해 prompt-style agent, RAG, MCP 도구 서버, trace와 guardrails, 실제 Foundry Agent Service agent 생성까지 이어지는 운영형 에이전트 개발 흐름을 경험하는 것입니다.
 
 ## 전체 목차
 
-- **Part 1: AI 개발의 반석 다지기**
-  - [제1장: 생성 AI 첫걸음: Python으로 시작하기](./Chapter1_Getting_Started/README.md)
+- **Part 1: AI 개발의 기초 다지기**
+  - [제1장: 생성형 AI 첫걸음: Python으로 시작하기](./Chapter1_Getting_Started/README.md)
   - [제2장: Microsoft Foundry 프로젝트와 공통 실행 기반](./Chapter2_Foundry_Fundamentals/README.md)
 - **Part 2: 지능형 AI 에이전트 구축**
   - [제3장: AI 에이전트의 세계: 기본 개념과 프레임워크](./Chapter3_Agents_Concepts/README.md)
@@ -21,10 +21,10 @@
 
 ## 시작하기 전에
 
-이 커리큘럼을 시작하려면 먼저 아래 **필요한 서비스/구독과 OS별 소프트웨어**를 준비합니다. endpoint·API key·모델 배포·Application Insights 같은 실제 리소스 생성과 `.env` 설정은 준비물이 갖춰진 다음 [실습 환경 처음 잡기](#실습-환경-처음-잡기)에서 진행합니다.
+이 커리큘럼을 시작하려면 먼저 아래 **필요한 서비스/구독과 OS별 소프트웨어**를 준비합니다. endpoint, API key, 모델 배포, Application Insights 같은 실제 리소스 생성과 `.env` 설정은 준비물이 갖춰진 다음 [실습 환경 처음 잡기](#실습-환경-처음-잡기)에서 진행합니다.
 
 > [!NOTE]
-> 이 문서의 명령 예시는 OS에 따라 문법이 다른 경우 **Windows (PowerShell)** 와 **macOS / Linux (bash·zsh)** 블록으로 나눠 표기합니다. 본인이 사용하는 OS의 블록을 따라 실행하세요. `uv run ...`처럼 양쪽이 동일한 명령은 그대로 사용하면 됩니다.
+> 이 문서의 명령 예시는 OS에 따라 문법이 다른 경우 **Windows (PowerShell)** 와 **macOS / Linux (bash, zsh)** 블록으로 나눠 표기합니다. 본인이 사용하는 OS의 블록을 따라 실행하세요. `uv run ...`처럼 양쪽이 동일한 명령은 그대로 사용하면 됩니다.
 
 ### 1. 필요한 서비스와 구독
 
@@ -38,7 +38,7 @@
 
 ### 2. uv 설치와 Python 3.11.9 (Python은 uv가 자동 관리)
 
-이 실습은 **[uv](https://docs.astral.sh/uv/) 기반 실행을 기본으로 안내합니다.** uv는 패키지 관리자이자 Python 버전 관리자로, 가상 환경 생성·활성화·패키지 설치를 한 번에 처리하고 실습용 Python 인터프리터까지 자동으로 내려받습니다. 초심자가 가장 자주 막히는 "Python 설치 / PATH 설정 / venv 활성화" 단계를 건너뛸 수 있습니다.
+이 실습은 **[uv](https://docs.astral.sh/uv/) 기반 실행을 기본으로 안내합니다.** uv는 패키지 관리자이자 Python 버전 관리자로, 가상 환경 생성, 활성화, 패키지 설치를 한 번에 처리하고 실습용 Python 인터프리터까지 자동으로 내려받습니다. 초심자가 가장 자주 막히는 "Python 설치 / PATH 설정 / venv 활성화" 단계를 건너뛸 수 있습니다.
 
 uv는 OS와 선호하는 패키지 매니저에 따라 여러 방법으로 설치할 수 있습니다. 가장 간단한 방법은 **공식 설치 스크립트**이며, 이미 패키지 매니저를 쓰고 있다면 그쪽이 더 편할 수 있습니다.
 
@@ -50,7 +50,7 @@ Windows (PowerShell):
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-macOS / Linux (bash·zsh):
+macOS / Linux (bash, zsh):
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -253,7 +253,7 @@ Tracing은 기본적으로 콘솔 exporter로 OpenTelemetry span을 출력합니
 | 챕터 | 주제 | 핵심 학습 내용 | 대표 실습 |
 | --- | --- | --- | --- |
 | 준비 | Foundry 프로젝트와 로컬 환경 | `.env`, API key, uv 환경(`uv sync`), 패키지 설치 | `pyproject.toml`, `uv.lock`, `.env` |
-| 1장 | 생성 AI 첫걸음 | Responses API 호출, 역할 부여, few-shot, multi-turn 프롬프트 | `1.5_first_openai_call.py`, `1.6.4.4_mulit_turn.py` |
+| 1장 | 생성형 AI 첫걸음 | Responses API 호출, 역할 부여, few-shot, multi-turn 프롬프트 | `1.5_first_openai_call.py`, `1.6.4.4_mulit_turn.py` |
 | 2장 | Foundry 공통 실행 기반 | 설정 검증, 공통 client, OpenTelemetry tracing smoke test | `2.1_check_foundry_settings.py`, `2.2_foundry_responses_smoke_test.py`, `2.3_foundry_tracing_smoke_test.py` |
 | 3장 | Prompt-style Agent | 역할 지시문, 도구 필요성, 상태 유지 패턴 | `3.4.2_agent_app.py`, `3.4.4_agent_with_calculator.py`, `3.4.5_stateful_agent.py` |
 | 4장 | Tool Use와 RAG | 계산 도구, 문서 기반 검색, embedding 기반 관련 문맥 선택, AI planner 기반 multi-tool routing | `4.2.1_multi_tool_agent.py`, `4.3.2_rag_agent.py`, `4.4.4.6_multi_tool_agent.py` |
@@ -267,6 +267,10 @@ Tracing은 기본적으로 콘솔 exporter로 OpenTelemetry span을 출력합니
 ## .env 샘플 코드
 
 `.env.example`을 복사해 `.env`를 만든 뒤 값을 채우세요.
+
+```bash
+cp ./.env.example ./.env
+```
 
 ```bash
 FOUNDRY_OPENAI_ENDPOINT=https://<resource>.openai.azure.com/
@@ -339,7 +343,7 @@ FOUNDRY_DEMO_MCP_TEST_QUESTION=How can I create a Microsoft Foundry project usin
 강의 시작 전에 아래 항목을 한 번에 확인합니다.
 
 - `uv --version`이 정상 출력됩니다(미설치 시 위 5번 안내로 설치). uv가 `.python-version`의 Python 3.11.9를 자동 사용합니다.
-- VS Code에서 이 저장소 폴더를 열고 통합 터미널을 사용합니다(Windows: PowerShell, macOS/Linux: zsh·bash).
+- VS Code에서 이 저장소 폴더를 열고 통합 터미널을 사용합니다(Windows: PowerShell, macOS/Linux: zsh, bash).
 - `.env.example`을 복사해 `.env`를 만들고, API key와 endpoint는 실제 값으로 채웁니다.
 - `FOUNDRY_REASONING_EFFORT=low`를 유지합니다. Agent Service 예제는 reasoning 옵션을 보내지 않습니다.
 - `uv sync`를 완료해 `.venv`가 생성되고, VS Code Python 확장이 `.venv`를 인터프리터로 감지합니다.
