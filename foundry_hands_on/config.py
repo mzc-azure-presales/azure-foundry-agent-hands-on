@@ -99,6 +99,8 @@ def get_settings() -> FoundrySettings:
             + ". See README.md for the .env template."
         )
 
+    # 위 missing 검사를 통과했으므로 endpoint와 api_key는 None이 아닙니다(타입 좁히기).
+    assert openai_endpoint is not None and api_key is not None
     return FoundrySettings(
         openai_endpoint=openai_endpoint,
         api_key=api_key,

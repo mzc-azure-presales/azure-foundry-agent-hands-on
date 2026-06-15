@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 # Windows 콘솔(cp949 등)에서도 한글이 깨지거나 오류로 멈추지 않도록 출력을 UTF-8로 맞춥니다.
 try:
-    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
 except (AttributeError, ValueError):
     pass
 
@@ -40,9 +40,9 @@ def _is_placeholder(value: str) -> bool:
     return "<" in value and ">" in value
 
 
-def _display(name: str, value: str) -> str:
+def _display(name: str | None, value: str) -> str:
     """비밀 값은 길이만, 일반 값은 그대로 보여 줍니다."""
-    if any(marker in name for marker in SECRET_HINTS):
+    if name and any(marker in name for marker in SECRET_HINTS):
         return f"설정됨 (길이 {len(value)}자)"
     return value
 
