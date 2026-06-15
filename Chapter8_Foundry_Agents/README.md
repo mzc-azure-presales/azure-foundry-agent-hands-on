@@ -43,6 +43,9 @@ Agent Service 예제인 8.1, 8.2, 8.3은 `FOUNDRY_REASONING_EFFORT`를 요청에
 
 8장은 앞 장과 달리 Foundry 프로젝트, Azure AI Search, Knowledge base, Application Insights 같은 Azure/Foundry 리소스를 함께 사용합니다. 아래 항목을 먼저 확인하면 실행 중 인증 오류나 리소스 없음 오류를 크게 줄일 수 있습니다.
 
+> [!TIP]
+> 8장에서 직접 만드는 리소스(Azure AI Search, Knowledge Base, Application Insights, Log Analytics)는 Foundry 프로젝트와 **같은 권장 리전(East US 2 또는 Sweden Central)과 하나의 전용 리소스 그룹**에 모으세요. 리전 선택 근거는 [최상위 README](../README.md)의 "Foundry 프로젝트와 엔드포인트, API key 준비" 단계를 참고하고, 실습이 끝나면 그 리소스 그룹을 통째로 삭제하면 과금이 한 번에 정리됩니다.
+
 | 구분 | 필요한 준비 | 사용하는 파일 | 필수 여부 |
 | --- | --- | --- | --- |
 | Foundry 프로젝트 | 모델 배포와 project endpoint 확인 | 8.1, 8.2, 8.3 | 필수 |

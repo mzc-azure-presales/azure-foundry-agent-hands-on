@@ -42,7 +42,7 @@
 > [!IMPORTANT]
 > **개인 신용카드로 트라이얼/구독을 만들어 참여하는 경우, 비용 관리에 주의하세요.**
 >
-> - **DCC(원화 결제) 차단:** 카드 등록·결제 시 해외 통화(예: USD)로 청구될 때 카드사나 결제 화면이 "원화로 결제(DCC)"를 제안하면 **거절하고 청구 통화 그대로 결제**합니다. DCC는 환율에 수수료가 얹혀 더 비쌉니다.
+> - **DCC(원화 결제) 차단:** 카드 등록, 결제 시 해외 통화(예: USD)로 청구될 때 카드사나 결제 화면이 "원화로 결제(DCC)"를 제안하면 **거절하고 청구 통화 그대로 결제**합니다. DCC는 환율에 수수료가 얹혀 더 비쌉니다.
 > - **단일 리소스 그룹:** 8장에서 직접 만드는 리소스(Azure AI Search, Knowledge Base, Application Insights, Log Analytics)는 모두 **하나의 전용 리소스 그룹**에 만드세요.
 > - **실습 종료 후 삭제:** 실습이 끝나면 그 리소스 그룹을 통째로 삭제하면 과금이 한 번에 정리됩니다. (포털에서 리소스 그룹 삭제, 또는 `az group delete --name <resource-group> --yes`)
 
@@ -150,7 +150,12 @@ uv sync --frozen --check
 
 생성된 `.venv`는 VS Code Python 확장이 자동으로 감지합니다. 우측 하단 또는 명령 팔레트(`Python: Select Interpreter`)에서 `.venv`가 선택되면, 코드 자동완성(IntelliSense), ▶ 실행 버튼, F5 디버깅이 모두 정상 동작합니다. 인터프리터가 자동으로 잡히지 않으면 직접 선택하세요. Windows는 `.\.venv\Scripts\python.exe`, macOS/Linux는 `./.venv/bin/python`입니다.
 
-### 3. Foundry 엔드포인트와 API key 준비
+### 3. Foundry 프로젝트와 엔드포인트, API key 준비
+
+트라이얼 계정으로 직접 Foundry 프로젝트를 만드는 경우, 먼저 **전용 리소스 그룹**을 만들고 그 안에 Foundry 프로젝트(리소스)를 생성합니다. 이때 **리전 선택이 모델, 기능 가용성을 좌우**합니다.
+
+> [!TIP]
+> Microsoft Learn은 **East US 2**와 **Sweden Central**을 *권장 (recommended)* 리전으로 안내합니다. 신규 모델, 기능과 프리뷰가 가장 먼저 들어와 가용성이 가장 넓고, 8장 Agent Service가 요구하는 Azure OpenAI Responses API도 지원합니다. Korea Central 등 다른 리전은 프로덕션에 정식 지원되지만 신규 모델이 늦게 들어올 수 있습니다. **특별한 목적이나 의도가 없다면 리소스 그룹과 Foundry 프로젝트를 East US 2(또는 Sweden Central)에 만드는 것을 권장합니다.** (최신 기능을 모두 사용해볼 수 있기에 추천합니다.) 최신 가용성은 [Microsoft Foundry 리전 지원](https://learn.microsoft.com/azure/foundry/reference/region-support) 문서에서 확인하세요.
 
 실습의 공통 실행 경로는 OpenAI-compatible endpoint와 API key를 사용합니다.
 
