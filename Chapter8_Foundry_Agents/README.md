@@ -49,7 +49,6 @@ Agent Service 예제인 8.1, 8.2, 8.3은 `FOUNDRY_REASONING_EFFORT`를 요청에
 | 구분 | 필요한 준비 | 사용하는 파일 | 필수 여부 |
 | --- | --- | --- | --- |
 | Foundry 프로젝트 | 모델 배포와 project endpoint 확인 | 8.1, 8.2, 8.3 | 필수 |
-| Azure 로그인 | `DefaultAzureCredential`이 사용할 수 있도록 `az login` 또는 VS Code Azure Account 로그인 | 8.1, 8.2, 8.3 | 필수 |
 | Azure AI Search 서비스 | Search endpoint와 key 확인 | 8.1, 8.2 | 필수 |
 | Foundry Search connection | Foundry project에 Azure AI Search connection 추가 | 8.1 | 권장 |
 | Knowledge base | Foundry 포털 또는 Azure Portal에서 Knowledge base 생성 | 8.2 | 필수 |
@@ -116,6 +115,7 @@ FOUNDRY_AI_SEARCH_QUERY_TYPE=simple
 
 8.1이 만드는 `foundry-agent-rag-index`에는 `semantic-config`라는 semantic configuration도 함께 추가됩니다. 나중에 이 index를 Knowledge base source로 선택할 때 semantic configuration 경고가 줄어듭니다.
 
+<!--
 ### 8.4.4 8.2용 Knowledge base 수동 생성
 
 8.2는 Knowledge base를 코드로 만들지 않습니다. 학습 전에 포털에서 Knowledge base를 직접 만든 뒤, 그 Knowledge base의 MCP endpoint를 Foundry Agent의 `MCPTool`로 연결합니다. 이렇게 하면 agent 설정 화면에서 Knowledge base 연결을 확인할 수 있고, agent가 필요할 때 `knowledge_base_retrieve` 도구를 호출해 답변합니다.
@@ -181,6 +181,7 @@ FOUNDRY_KNOWLEDGE_BASE_NAME=knowledgebase12
 ```
 
 8.2는 `AZURE_SEARCH_ENDPOINT`와 `FOUNDRY_KNOWLEDGE_BASE_NAME`으로 Knowledge base MCP endpoint를 만들고, `FOUNDRY_PROJECT_RESOURCE_ID`로 RemoteTool/MCP project connection을 생성하거나 업데이트한 뒤, `FOUNDRY_KB_MCP_CONNECTION_NAME`을 `MCPTool(project_connection_id=...)`에 넣어 agent definition에 연결합니다. 이 방식은 retrieve 결과를 user message에 직접 붙이는 방식이 아니라, agent가 연결된 Knowledge base 도구를 호출하는 방식입니다.
+-->
 
 ### 8.4.5 8.3용 MCP 서버 코드 연결
 
