@@ -15,6 +15,7 @@
 | `uv sync`가 비정상적으로 느리거나 "파일이 사용 중", 다운로드한 파일이 사라짐 | 안티바이러스 실시간 검사 | [2장](#2-windows-안티바이러스--microsoft-defender) |
 | `path too long`, 설치 중 경로 길이 오류 (Windows) | MAX_PATH(260자) 제한 | [3.2](#32-긴-경로long-path-활성화-windows에서-더-자주-필요) |
 | "개발자 모드를 켜야 하나요?" | 대부분 불필요 | [3.1](#31-windows-개발자-모드-대부분-불필요) |
+| Windows 실행 시 한글 출력이 `?쒕뜑`처럼 깨짐(소스 파일·편집기에선 정상) | 콘솔 코드 페이지가 cp949 ↔ UTF-8 불일치 | [4장](#4-windows에서-한글-메시지가-깨져-보이는-경우) |
 
 빠른 자가 점검(환경 준비가 됐는지):
 
@@ -263,7 +264,73 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 ---
 
-## 4. 그 밖에 자주 겪는 것
+## 4. Windows에서 한글 메시지가 깨져 보이는 경우
+
+### 4.1 증상
+
+Windows PC에서 `uv run` 명령으로 스크립트를 실행했을 때, 출력되는 한글 메시지가 `?쒕뜑`와 같이 깨진 글자로 표시되는 경우가 있습니다.
+
+이 경우에도 소스 파일 자체는 정상입니다. VS Code 등 편집기에서 소스 파일을 열어 보면 한글이 올바르게 보이는데 실행 시 콘솔 출력만 깨진다면, 파일이 손상된 것이 아니라 콘솔의 문자 인코딩 설정이 어긋난 것입니다. 따라서 소스를 다시 내려받으실 필요는 없습니다.
+
+### 4.2 원인
+
+이 저장소의 소스 파일은 UTF-8로 작성되어 있습니다. 반면 한국어 Windows의 명령줄 창은 기본 코드 페이지가 cp949(949)로 설정되어 있는 경우가 많습니다. UTF-8로 저장된 문자를 cp949 기준으로 해석하면서 한글이 깨져 보이는 것입니다.
+
+DOS의 `type` 명령으로 소스 파일을 출력했을 때도 한글이 깨진다면, 콘솔 코드 페이지가 cp949로 설정되어 있다는 신호입니다.
+
+### 4.3 해결 방법
+
+아래 절차에 따라 별도의 명령줄 창을 열어 실행해 보시기 바랍니다. 시스템 환경변수나 전역 설정을 바꾸지 않고 해당 창에서만 인코딩을 UTF-8로 맞추는 방식이므로, 기존 시스템 설정에 영향을 주지 않습니다.
+
+> [!NOTE]
+> 아래 2번과 3번 설정은 명령줄 창 세션에만 적용됩니다. 창을 새로 열 때마다 다시 입력하셔야 합니다.
+
+1. `Windows + R` 키를 누른 후 `conhost`를 입력하고 Enter를 누릅니다.
+2. 열린 명령줄 창에서 아래 명령을 입력하고 Enter를 누릅니다.
+
+   ```bat
+   set PYTHONUTF8=1
+   ```
+
+3. 이어서 아래 명령을 입력하고 Enter를 누릅니다.
+
+   ```bat
+   chcp 65001
+   ```
+
+4. `cd` 명령으로 GitHub에서 받은 소스 코드 폴더로 이동합니다.
+
+   ```bat
+   cd 폴더경로
+   ```
+
+5. 의존성을 설치합니다. 처음 한 번은 패키지 설치로 시간이 걸릴 수 있습니다.
+
+   ```bat
+   uv sync
+   ```
+
+6. 스크립트를 실행합니다.
+
+   ```bat
+   uv run 스크립트파일경로
+   ```
+
+### 4.4 적용 결과 확인
+
+`chcp 65001` 적용 이후 `type 스크립트파일경로`로 소스 파일을 다시 출력했을 때 한글이 정상으로 보이면, 인코딩이 올바르게 맞춰진 것입니다.
+
+### 4.5 참고 사항
+
+**글꼴 문제** — `chcp 65001` 적용 이후에도 한글이 네모나 빈칸으로 표시되는 경우가 있습니다. 이는 인코딩 문제가 아니라 명령줄 창의 글꼴이 한글 글리프를 지원하지 않아 생기는 현상입니다. 명령줄 창의 제목 표시줄을 오른쪽 클릭한 후 속성에서 글꼴을 D2Coding이나 굴림체 등 한글을 지원하는 글꼴로 변경하시면 됩니다.
+
+**conhost를 사용하는 이유** — Windows Terminal(wt) 대신 레거시 콘솔(conhost)을 사용하도록 안내한 이유는, 터미널 종류에 따른 변수를 줄여 동일한 환경에서 절차를 재현하기 위함입니다. Windows Terminal에서도 동일한 명령으로 해결되는 경우가 많으나, 환경에 따라 동작이 다를 수 있어 conhost를 기준으로 안내합니다.
+
+**영구 적용에 관하여** — 매번 `set PYTHONUTF8=1`을 입력하기 번거로우신 경우, 시스템 환경변수에 `PYTHONUTF8=1`을 등록하면 2번 단계를 생략할 수 있습니다. 다만 환경변수나 코드 페이지를 전역으로 변경하면 다른 프로그램이나 기존에 의도한 시스템 설정과 충돌할 여지가 있습니다. 이러한 이유로 본 문서에서는 시스템 설정을 바꾸지 않는 세션 단위 절차를 기본 권장 방법으로 안내하며, 전역 적용은 영향 범위를 이해하고 계신 경우에만 선택하시기 바랍니다.
+
+---
+
+## 5. 그 밖에 자주 겪는 것
 
 - **명령을 바꿨는데 안 먹힘**: 환경 변수(PATH, `UV_*`)를 바꾼 뒤에는 **새 터미널**을 여세요. VS Code 통합 터미널도 새로 열어야 반영됩니다.
 - **`uv`를 못 찾음**: 설치 직후면 터미널을 새로 열고 `uv --version` 확인. 자세한 설치는 [최상위 README](./README.md#2-uv-설치와-python-3119-python은-uv가-자동-관리)를 참고하세요.
@@ -279,3 +346,5 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 - Microsoft Learn — Windows 개발자 모드: <https://learn.microsoft.com/windows/advanced-settings/developer-mode>
 - Microsoft Learn — Defender 안티바이러스 제외 구성: <https://learn.microsoft.com/defender-endpoint/configure-extension-file-exclusions-microsoft-defender-antivirus>
 - Microsoft Learn — Dev Drive 성능 모드: <https://learn.microsoft.com/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode>
+- Python — UTF-8 모드(`PYTHONUTF8`): <https://docs.python.org/3/using/cmdline.html#envvar-PYTHONUTF8>
+- Microsoft Learn — `chcp` 명령(콘솔 코드 페이지): <https://learn.microsoft.com/windows-server/administration/windows-commands/chcp>
